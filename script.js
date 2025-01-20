@@ -31,24 +31,85 @@ class Pizza {
     return sizePriceAdjustment[this.size] || 0; // Default to no adjustment if size is invalid
   }
 }
-// Write code which models an order to a pizza place as a class.
-// The order has a customer name, delivery type,
-// and there can be several pizzas in one order.
-// Order can be updated by adding pizzas to it with a method of the order class.
 
+// Define a pizza order class
 class PizzaOrder {
-  customerName = "";
-  deliveryType = "EAT_IN"; // other values TAKE_OUT, DELIVERY
-  pizzas = [];
+  constructor(customerName = "", deliveryType = "EAT_IN") {
+    this.customerName = customerName;
+    this.deliveryType = deliveryType;
+    this.pizzas = [];
+  }
 
+  // Add a pizza to the order
   addPizza(pizza) {
     this.pizzas.push(pizza);
   }
 
+  // Get the total price of the order, including delivery fee
   getPrice() {
-    let totalPrice = 0;
-    // 1) check delivery type and add delivery fee if needed
-    // 2) loop over the pizzas and sum up their prices
-    return totalPrice;
+    let totalPrice = this.pizzas.reduce(
+      (total, pizza) => total + pizza.getPrice(),
+      0
+    );
+
+    // Add delivery charge based on delivery type
+    let deliveryCharge = 0;
+    switch (this.deliveryType) {
+      case "EAT_IN":
+        deliveryCharge = 0; // No charge for Eat In
+        break;
+      case "TAKE_OUT":
+        deliveryCharge = 1.5 * 100; // $1.5 for Take Out (converted to cents)
+        break;
+      case "DELIVERY":
+        deliveryCharge = 5 * 100; // $5 for Delivery (converted to cents)
+        break;
+    }
+
+    // Return the total price including the delivery charge
+    return totalPrice + deliveryCharge;
   }
+}
+
+// Array to hold selected pizzas
+let selectedPizzas = [];
+let currentOrder = new PizzaOrder(); // Initialize a new order
+
+// Add a pizza to the order
+function addPizza(name, toppings, basePrice) {
+  const pizza = new Pizza(name, toppings, basePrice);
+  currentOrder.addPizza(pizza); // Add pizza to the current order
+  selectedPizzas.push(pizza); // Add pizza to the list of selected pizzas
+  updateSelectedPizzas();
+}
+
+// Update the UI with the selected pizzas
+function updateSelectedPizzas() {
+  const selectedPizzasList = document.getElementById("selectedPizzas");
+  selectedPizzasList.innerHTML = ""; // Clear the list
+
+  selectedPizzas.forEach((pizza) => {
+    const li = document.createElement("li");
+    li.textContent = `${pizza.name} - $${(pizza.getPrice() / 100).toFixed(2)}`;
+    selectedPizzasList.appendChild(li);
+  });
+
+  updateTotalPrice(); // Update total price whenever pizzas are added
+}
+
+// Update the total price displayed
+function updateTotalPrice() {
+  const totalPriceInCents = currentOrder.getPrice();
+  document.getElementById("totalPrice").textContent = (
+    totalPriceInCents / 100
+  ).toFixed(2); // Convert to dollars
+}
+
+// Calculate the total price when the "Calculate Total Price" button is clicked
+function calculateTotalPrice() {
+  const deliveryType = document.getElementById("deliveryType").value;
+  currentOrder.deliveryType = deliveryType; // Update the order's delivery type
+
+  // Update the total price with the new delivery charge
+  updateTotalPrice();
 }
