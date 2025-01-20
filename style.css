@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #ff6347; /* Tomato color for the main heading */
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  background-color: #ff6347; /* Tomato color */
+  color: white;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #e5533f; /* Darker shade of tomato on hover */
+}
+
+#pizza-menu {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+#order-details {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+#order-details input,
+#order-details select {
+  padding: 8px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+#order-details select {
+  font-size: 1rem;
+}
+
+#selectedPizzas {
+  margin-top: 15px;
+  padding: 0;
+}
+
+#selectedPizzas li {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+#totalPrice {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ff6347; /* Tomato color for total price */
+}
+
+button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #pizza-menu,
+  #order-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  #pizza-menu ul {
+    width: 48%;
+  }
+
+  #order-details {
+    width: 48%;
+  }
+}
