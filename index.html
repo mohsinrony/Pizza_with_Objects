@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizza Order</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Pizza Order</h1>
+    <div id="pizza-menu">
+      <h2>Pizza Menu</h2>
+      <ul>
+        <li>
+          <h3>Margherita</h3>
+          <p>Toppings: Tomato, Mozzarella, Basil</p>
+          <p>Price: $8.99</p>
+          <button
+            onclick="addPizza('Margherita', ['Tomato', 'Mozzarella', 'Basil'], 8.99)"
+          >
+            Add to Order
+          </button>
+        </li>
+        <li>
+          <h3>Pepperoni</h3>
+          <p>Toppings: Tomato, Mozzarella, Pepperoni</p>
+          <p>Price: $9.99</p>
+          <button
+            onclick="addPizza('Pepperoni', ['Tomato', 'Mozzarella', 'Pepperoni'], 9.99)"
+          >
+            Add to Order
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div id="order-details">
+      <h2>Order Details</h2>
+      <p>Customer Name: <input type="text" id="customerName" /></p>
+      <p>
+        Delivery Type:
+        <select id="deliveryType">
+          <option value="EAT_IN">Eat In</option>
+          <option value="TAKE_OUT">Take Out</option>
+          <option value="DELIVERY">Delivery</option>
+        </select>
+      </p>
+      <h3>Selected Pizzas:</h3>
+      <ul id="selectedPizzas"></ul>
+      <p>Total Price: $<span id="totalPrice">0.00</span></p>
+      <button onclick="calculateTotalPrice()">Calculate Total Price</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
